@@ -55,7 +55,7 @@ func findAvailableTemplates() map[string]string {
     return m
 }
 
-func loadTemplate(tmplName string) (*template.Template, error) {  
+func loadTemplate(tmplName string) (*template.Template, error) {
     if strings.HasSuffix(tmplName, ".tmpl") {
         tmpl, err := template.ParseFiles(tmplName)
         if err == nil {
@@ -146,7 +146,7 @@ func execute(cmdString string) error {
     cmd := exec.Command(prog, args...)
     cmd.Stdout = os.Stdout
     cmd.Stderr = os.Stderr
-    return cmd.Run()    
+    return cmd.Run()
 }
 
 func argumentsOk() bool {
@@ -172,7 +172,7 @@ func main() {
             result, err = applyTemplate(os.Args[2], os.Args[3], os.Args[4:])
             fmt.Println(result)
         case "run":
-            err = runTemplate(os.Args[2], os.Args[3], os.Args[4:]) 
+            err = runTemplate(os.Args[2], os.Args[3], os.Args[4:])
         case "list":
             tmplMap := findAvailableTemplates()
             for k, _ := range tmplMap {
