@@ -95,7 +95,7 @@ func applyTemplate(tmplName, dataFile string, args []string) (string, error) {
     if len(matchMap) != len(args) {
         return "", errors.New(
             fmt.Sprintf("Template requires %d command line arguments",
-                len(matches)))
+                len(matchMap)))
     }
     for k, v := range matchMap {
         idx, _ := strconv.Atoi(v)
