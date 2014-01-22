@@ -26,10 +26,6 @@ func loadData(dataFile string) (map[interface{}]interface{}, error) {
 }
 
 func findAvailableTemplates() map[string]string {
-    var (
-        f *os.File
-        list []string
-    )
     m := make(map[string]string)
     me, err := user.Current()
     if err != nil { return m }
@@ -41,10 +37,10 @@ func findAvailableTemplates() map[string]string {
         m[name] = path
         return nil
     })
-    f, err = os.Open(".")
+    f, err := os.Open(".")
     if err != nil { return m }
     defer f.Close()
-    list, err = f.Readdirnames(-1)
+    list, err := f.Readdirnames(-1)
     if err != nil { return m }
     for _, name := range list {
         if !strings.HasSuffix(name, ".tmpl") { continue }
@@ -73,14 +69,9 @@ func loadTemplate(tmplName string) (*template.Template, error) {
 }
 
 func applyTemplate(tmplName, dataFile string, args []string) (string, error) {
-    var (
-        data map[interface{}]interface{}
-        tmpl *template.Template
-        err error
-    )
-    data, err = loadData(dataFile)
+    data, err := loadData(dataFile)
     if err != nil { return "", err }
-    tmpl, err = loadTemplate(tmplName)
+    tmpl, err := loadTemplate(tmplName)
     if err != nil { return "", err }
     buffer := new(bytes.Buffer)
     err = tmpl.Execute(buffer, data)
