@@ -13,14 +13,14 @@ import (
     "strings"
     "strconv"
     "text/template"
-    "launchpad.net/goyaml"
+    "gopkg.in/v1/yaml"
 )
 
 func loadData(dataFile string) (map[interface{}]interface{}, error) {
     data, err := ioutil.ReadFile(dataFile)
     if err != nil {return nil, err}
     m := make(map[interface{}]interface{})
-    err = goyaml.Unmarshal(data, m)
+    err = yaml.Unmarshal(data, m)
     if err != nil {return nil, err}
     return m, nil
 }
