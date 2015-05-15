@@ -13,7 +13,7 @@ import (
     "strings"
     "strconv"
     "text/template"
-    "gopkg.in/yaml.v1"
+    "gopkg.in/yaml.v2"
 )
 
 func loadData(dataFile string) (map[interface{}]interface{}, error) {
