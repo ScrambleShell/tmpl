@@ -1,0 +1,16 @@
+mappings: [0]
+video:
+    codec: libx264
+    preset: slow
+    crf: 18
+    resolution: hd1080
+    deinterlace: off
+audio:
+    codec: libfdk_aac
+    bitrate: 192k
+start: off
+limit: off
+end: off
+threads: 4
+input: $0
+output: $1
