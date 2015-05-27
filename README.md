@@ -5,8 +5,9 @@ This is a template engine for configuring and running complex terminal commands.
 Take ffmpeg for example. To transcode a HD video you might use something along the lines of:
 
 ```
-ffmpeg -i "in.mkv" -c:v libx264 -preset slow -crf 18 -filter:v "crop=1904:800:10:140" \
--c:a libfdk_aac -b:a 448k -c:s copy -threads 4 -y "out.mkv"
+ffmpeg -i "in.mkv" -c:v libx264 -preset slow -crf 18 \
+-filter:v "crop=1904:800:10:140" -c:a libfdk_aac \
+-b:a 448k -c:s copy -threads 4 -y "out.mkv"
 ```
 
 Wouldn't it be much nicer to have a yaml configuration file for defining the various parameters? For example:
