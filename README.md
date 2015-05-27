@@ -10,7 +10,7 @@ ffmpeg -i "in.mkv" -c:v libx264 -preset slow -crf 18 \
 -b:a 448k -c:s copy -threads 4 -y "out.mkv"
 ```
 
-Wouldn't it be much nicer to have a yaml configuration file for defining the various parameters? For example:
+Wouldn't it be much nicer to have a YAML configuration file for defining the various parameters? For example:
 
 ```
 video:
@@ -48,12 +48,38 @@ go get github.com/sf1/tmpl
 
 ### Defining templates
 
-...
+Currently the engine expects all templates to be located in
+
+```
+$HOME/templates
+```
+
+Templates are defined using Go's template syntax, which is documented [here](http://golang.org/pkg/html/template/).
 
 ### Creating configuration files
 
-...
+Configuration files are plain YAML files used to pass parameters when templates are applied or "run". Their structure depends on each template. Configuration files may contain placeholders for additional command line parameters:
+
+```
+input: $0
+output: $1
+```
+
+$0 and $1 refer to parameters that can be specified when the engine is invoked from the terminal. The main use of this feature is to allow specifying input and output files.
 
 ### Applying and "Running" templates
 
-...
+Templates can be applied or "run". When templates are applied, the engine outputs the result but does not attempt to run it. For example
+
+```
+tmpl apply ffmpeg config.yaml in.mkv out.mkv
+```
+
+outputs the ffmpeg command shown at the top of this readme, but does not run it.
+
+```
+tmpl run ffmpeg config.yaml in.mkv out.mkv
+```
+
+applies the template and attempts to run the result.
+
